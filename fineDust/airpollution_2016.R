@@ -24,8 +24,11 @@ View(w_total)
 
 #서울의 미세먼지(pm2.5) 시각화
 library(ggplot2)
-ggplot(data=(w_total%>%filter(area=="서울")), aes(x=day,y=PM10,group=1)) +
+ggplot(data=(w_total%>%filter(area=="서울")), aes(x=day,y=PM2.5,group=1)) +
+  geom_line(aes(color=area))
+
+ggplot(data=w_total, aes(x=day,y=PM2.5,group=1)) +
   geom_line(aes(color=area))
 
 #csv파일로 저장
-write.csv(w_total,"c/Users/Junghyun Lee/Documents/Rproject/Rproject/airpollution_2016.csv",row.names = F)
+write.csv(w_total,file="fineDust/airpollution_2016.csv",row.names = F)
