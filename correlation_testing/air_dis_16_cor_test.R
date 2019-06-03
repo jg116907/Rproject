@@ -1,5 +1,5 @@
-air16<-read.csv("air_pollution/airpollution_2016.csv")
-dis16<-read.csv("disorder/disorder2016_f.csv")
+air16<-read.csv("Rproject/air_pollution/airpollution_2016.csv")
+dis16<-read.csv("Rproject/disorder/disorder2016_f.csv")
 
 #대기오염 데이터에서 서울 지역 데이터만 추출
 library(dplyr)
@@ -55,8 +55,18 @@ cor(air16_seoul_pm25_nor$PM2.5,dis16_df_nor$x)
 #상관관계 가시화
 plot(air16_seoul_pm25_nor$PM2.5,dis16_df_nor$x)
 
-
 # 2. 이상치 제거
-cor(total_df$PM2.5,total_df$x) 
+cor(total_df$PM2.5,total_df$x)  # -0.07438199
 plot(total_df$PM2.5,total_df$x)
+
+
+# 2016년 정신장애데이터 이름 변경
+names(dis16) <- c("Day","Population")
+
+# 날짜 chr으로 변경
+str(dis16_df_nor)
+
+ggplot(dis16_df_nor, aes(x = Day, y = Population, group = 1)) + geom_line(linetype = 1, lwd = 0.8, color = 'red') + 
+  ggtitle("2016, Mental disorder Population") + 
+  theme(plot.title = element_text(size = 17))
 
